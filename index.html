@@ -13,23 +13,50 @@
       font-family: 'Montserrat', sans-serif;
     }
     body {
-  background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #101820, #0d0d0d);
-  background-size: 400% 400%;
-  animation: bgMove 15s ease infinite;
-  color: #fff;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+      background: linear-gradient(-45deg, #0f0f0f, #1a1a1a, #101820, #0d0d0d);
+      background-size: 400% 400%;
+      animation: bgMove 15s ease infinite;
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+    @keyframes bgMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Particle background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
     header {
       text-align: center;
       padding: 100px 20px 60px;
       position: relative;
       background: linear-gradient(to right, #101010, #1c1c1c);
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, #00ffd5, transparent, #00ffd5);
+      animation: neonLine 2s linear infinite;
+    }
+    @keyframes neonLine {
+      0% { background-position: 0 0; }
+      100% { background-position: 200% 0; }
     }
     header h1 {
       font-family: 'Orbitron', sans-serif;
@@ -39,33 +66,16 @@
       animation: floatTitle 3s ease-in-out infinite;
     }
     @keyframes floatTitle {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(10px); }
-}
+      0%, 100% { transform: translateX(0); }
       50% { transform: translateX(10px); }
     }
     header p {
-  font-size: 20px;
-  color: #ccc;
-  margin-top: 10px;
-  font-weight: 500;
-  text-shadow: 0 0 10px #00ffd5;
-  animation: glowPulse 3s ease-in-out infinite;
-}
-    .stars {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80') no-repeat center center / cover;
-      animation: moveStars 200s linear infinite;
-      opacity: 0.2;
-      z-index: 0;
-    }
-    @keyframes moveStars {
-      0% { background-position: 0 0; }
-      100% { background-position: 10000px 5000px; }
+      font-size: 20px;
+      color: #ccc;
+      margin-top: 10px;
+      font-weight: 500;
+      text-shadow: 0 0 10px #00ffd5;
+      animation: glowPulse 3s ease-in-out infinite;
     }
     section {
       max-width: 1000px;
@@ -73,7 +83,22 @@
       padding: 50px 20px;
       position: relative;
       z-index: 1;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
     }
+    section:nth-of-type(2) { animation-delay: 0.3s; }
+    section:nth-of-type(3) { animation-delay: 0.6s; }
+    section:nth-of-type(4) { animation-delay: 0.9s; }
+    section:nth-of-type(5) { animation-delay: 1.2s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     h2 {
       font-size: 30px;
       color: #00ffd5;
@@ -131,9 +156,6 @@
       background: #121212;
       padding: 40px 20px;
     }
-    .projects h2 {
-      color: #00ffd5;
-    }
     .projects-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -167,37 +189,22 @@
       font-size: 14px;
     }
     @media screen and (max-width: 768px) {
-      header h1 {
-        font-size: 36px;
-      }
-      header p {
-        font-size: 16px;
-      }
-      h2 {
-        font-size: 24px;
-      }
-      .services li, .project-card {
-        font-size: 14px;
-      }
-      .contact a {
-        width: 100%;
-        text-align: center;
-      }
+      header h1 { font-size: 36px; }
+      header p { font-size: 16px; }
+      h2 { font-size: 24px; }
+      .services li, .project-card { font-size: 14px; }
+      .contact a { width: 100%; text-align: center; }
     }
-  @keyframes glowPulse {
-  0% { text-shadow: 0 0 10px #00ffd5, 0 0 20px #00ffd5; }
-  50% { text-shadow: 0 0 20px #00ffc3, 0 0 30px #00ffc3; }
-  100% { text-shadow: 0 0 10px #00ffd5, 0 0 20px #00ffd5; }
-}
-@keyframes glowGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-</style>
+    @keyframes glowPulse {
+      0% { text-shadow: 0 0 10px #00ffd5, 0 0 20px #00ffd5; }
+      50% { text-shadow: 0 0 20px #00ffc3, 0 0 30px #00ffc3; }
+      100% { text-shadow: 0 0 10px #00ffd5, 0 0 20px #00ffd5; }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body>
-  <div class="stars"></div>
+  <div id="particles-js"></div>
   <header>
     <h1>Абылай Райымқұл</h1>
     <p class="tagline">веб-разработчик | Создаю стильные и работающие сайты</p>
@@ -205,61 +212,69 @@
 
   <section class="about">
     <h2>Обо мне</h2>
-    <p>Я — молодой и амбициозный разработчик с чувством стиля и стремлением к качеству. Делаю современные сайты, которые не только красиво выглядят, но и приносят результат. Умею делать адаптивную вёрстку, подключать PHP, базы данных и создавать красивый фронтенд с анимациями. Работаю с душой, чтобы каждый проект был уникальным и запоминающимся.</p>
+    <p>Я — молодой и амбициозный разработчик с чувством стиля и стремлением к качеству...</p>
   </section>
 
   <section class="services">
     <h2>Что я делаю</h2>
     <ul>
-      <li> Одностраничные лендинги с анимацией и дизайном под ключ</li>
-      <li> Пригласительные сайты и сайты визиток </li>
-      <li> Полностью адаптивные сайты под мобильные и планшеты</li>
-      <li> Эффекты, интерактив, современные UI-компоненты</li>
-      <li>ключи для создание сайта HTML ,HTML5 ,CSS, PHP, JAVA ,JSON</li>
+      <li>Лендинги с анимацией</li>
+      <li>Сайты визитки</li>
+      <li>Адаптив под мобильные</li>
+      <li>Интерактив и UI</li>
+      <li>HTML, CSS, PHP, JSON</li>
     </ul>
   </section>
 
-<section class="info">
-  <h2>Информация</h2>
-  <p>Если ты хочешь узнать больше обо мне, моих принципах работы и подходе к созданию сайтов — это место для тебя. Я считаю, что каждый проект должен отражать личность заказчика и вызывать доверие у пользователей. Поэтому перед началом работы я стараюсь максимально понять твои цели и желания. Всё начинается с идеи — а я помогаю воплотить её в жизнь.</p>
-</section>
+  <section class="info">
+    <h2>Информация</h2>
+    <p>Каждый проект должен отражать личность заказчика и вызывать доверие у пользователей.</p>
+  </section>
 
-<section class="projects">
+  <section class="projects">
     <h2>Примеры работ</h2>
-    $1<div class="project-card">
-  <h3>ℹ️ Инфо-блок</h3>
-  <p>Дополнительная информационная страница для объяснения подхода, целей и философии проектов.</p>
-</div>
-<div class="project-card">
-        <h3>💼 Визитка бизнесмена</h3>
-        <p>Современный одностраничник с плавной прокруткой и контактной формой.</p>
-      </div>
-      <div class="project-card">
-        <h3>🕌 Муслим Шоп</h3>
-        <p>Магазин с товарами, фильтрами, корзиной и оформлением заказа (на PHP).</p>
-      </div>
-      <div class="project-card">
-        <h3>🥊 Боксёрский клуб</h3>
-        <p>Сайт для боксёрского сообщества с афишами боёв, галереей и формой записи.</p>
-      </div>
+    <div class="project-card">
+      <h3>ℹ️ Инфо-блок</h3>
+      <p>Пояснение подхода, целей и философии проектов.</p>
+    </div>
+    <div class="project-card">
+      <h3>💼 Визитка бизнесмена</h3>
+      <p>Одностраничник с прокруткой и формой.</p>
+    </div>
+    <div class="project-card">
+      <h3>🕌 Муслим Шоп</h3>
+      <p>Интернет-магазин с корзиной.</p>
     </div>
   </section>
 
   <section class="contact">
-  <h2>Связаться со мной</h2>
-  <p>Хочешь свой крутой сайт? Пиши прямо сейчас:</p>
-  <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; margin-top: 20px;">
-    <a href="https://t.me/abekebroo" target="_blank" style="background: #229ED9; color: #fff; display: flex; align-items: center; gap: 10px;">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" width="20"> Telegram
-    </a>
-    <a href="https://wa.me/77476326345" target="_blank" style="background: #25D366; color: #fff; display: flex; align-items: center; gap: 10px;">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" width="20"> WhatsApp
-    </a>
-  </div>
-</section>
+    <h2>Связаться со мной</h2>
+    <p>Хочешь сайт? Напиши прямо сейчас:</p>
+    <div style="display: flex; gap: 15px; justify-content: center;">
+      <a href="https://t.me/abekebroo" target="_blank">Telegram</a>
+      <a href="https://wa.me/77476326345" target="_blank">WhatsApp</a>
+    </div>
+  </section>
 
   <footer>
     &copy; 2025 Абылай Райымқұл. Сделано с душой ✨
   </footer>
+
+  <script>
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 60 },
+        size: { value: 2 },
+        color: { value: '#00ffd5' },
+        line_linked: { enable: true, color: '#00ffd5' },
+        move: { speed: 1 }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: 'repulse' }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
